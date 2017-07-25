@@ -140,7 +140,7 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;; Source Code Pro （测试中文字体的好不好看啊）
-   dotspacemacs-default-font '("Source Code Pro"
+   dotspacemacs-default-font '("Menlo"
                                :size 13
                                :weight normal
                                :width normal
@@ -336,6 +336,93 @@ you should place your code here."
   (spacemacs//set-monospaced-font  "Hiragino Sans GB" "Source Code Pro" 14 16)
 
 
+  ;; 鼠标设置, 不要跳屏
+  (setq scroll-margin 5
+        scroll-conservatively 10000)
+
+  ;; When a file actually ends, put empty line markers into the left hand side.
+  (setq-default indicate-empty-lines t)
+  (when (not indicate-empty-lines)
+    (toggle-indicate-empty-lines))
+
+  ;; 在fringe上显示一个小箭头指示当前buffer的边界
+  (setq-default indicate-buffer-boundaries 'left)
+
+  (setq echo-keystrokes 0.1)        ; 尽快显示按键序列
+  (setq scroll-margin 5
+        scroll-conservatively 10000)
+  (setq-default indicate-buffer-boundaries 'left)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Key bindings for mac os x
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Basic Navigation & Edit
+  (global-set-key (kbd "s-<right>")  'move-end-of-line)
+  (global-set-key (kbd "s-<left>")  'move-beginning-of-line)
+  (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+  (global-set-key (kbd "s-<down>") 'end-of-buffer)
+
+  (global-set-key (kbd "s-]")  'alternate-window)
+  (global-set-key (kbd "s-[")  'alternate-window)
+  (global-set-key (kbd "s-{")  'evil-prev-buffer)
+  (global-set-key (kbd "s-}")  'evil-next-buffer)
+
+  ;; edit
+  (global-set-key (kbd "s-d")  'kill-whole-line)
+  
+  ;; disabled
+  ;; (global-set-key (kbd "s-j")  'backward-kill-word)
+
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Idea from Eclipse's format code: indent-region
+  ;; @TODO: if selected indent selection otherwise indent buffer.
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun indent-buffer ()
+    "Indent the whole buffer."
+    (interactive)
+    (save-excursion
+      (indent-region (point-min) (point-max) nil)))
+
+  (global-set-key (kbd "s-F") 'indent-buffer)
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; scroll functions
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  (defun hold-line-scroll-up()
+    "Scroll the page with the cursor in the same line"
+    (interactive)
+    ;; move the cursor also
+    (let ((tmp (current-column)))
+      (scroll-up 18)
+      (line-move-to-column tmp)
+      ;; (forward-line -18)
+      )
+    )
+
+  (defun hold-line-scroll-down()
+    "Scroll the page with the cursor in the same line"
+    (interactive)
+    ;; move the cursor also
+    (let ((tmp (current-column)))
+      (scroll-down 18)
+      (line-move-to-column tmp)
+      ;; (forward-line 18)
+      )
+    )
+
+  (global-set-key (kbd "M-n") 'hold-line-scroll-up)
+  (global-set-key (kbd "M-p") 'hold-line-scroll-down)
+  ;(global-set-key (kbd "M-n") 'cua-scroll-up)
+  ;(global-set-key (kbd "M-p") 'cua-scroll-down)
+
+
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; DEV
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
   (setq-default
    ;; js2-mode
    js2-basic-offset 2
@@ -351,10 +438,6 @@ you should place your code here."
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
-  (setq echo-keystrokes 0.1)        ; 尽快显示按键序列
-  (setq scroll-margin 5
-        scroll-conservatively 10000)
-  (setq-default indicate-buffer-boundaries 'left)
 
 
 
@@ -372,7 +455,7 @@ you should place your code here."
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
    (quote
-    (smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb"))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
