@@ -370,12 +370,13 @@ you should place your code here."
 
   ;; edit
   (global-set-key (kbd "s-d")  'kill-whole-line)
+  ;; (global-set-key (kbd "C-s-268632076")  'llll) 
+  (global-set-key (kbd "s-L")  'kill-current-buffer)
+  (global-set-key (kbd "C-s-268632076")  'kill-current-buffer) ;; s-c-L
 
   ;; file
   (global-set-key (kbd "s-e")  'helm-buffers-list)
   (global-set-key (kbd "s-p")  'helm-projectile-find-file)
-  (global-set-key (kbd "s-L")  'kill-current-buffer)
-
 
 
 
