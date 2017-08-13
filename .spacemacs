@@ -32,7 +32,7 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     go
+     (go :variables go-tab-width 4)
      html
      javascript
      ;; ----------------------------------------------------------------
@@ -45,11 +45,11 @@ values."
      better-defaults
      emacs-lisp
      git
-     markdown
+     (markdown :variables markdown-live-preview-engine 'vmd)
      org
      (shell :variables
-             shell-default-height 30
-             shell-default-position 'bottom)
+            shell-default-height 30
+            shell-default-position 'bottom)
      spell-checking
      syntax-checking
      version-control
@@ -141,7 +141,7 @@ values."
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;; Source Code Pro （测试中文字体的好不好看啊）
    dotspacemacs-default-font '("Menlo"
-                               :size 13
+                               :size 12
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
@@ -267,7 +267,7 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers t
+   dotspacemacs-line-numbers nil
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
@@ -319,11 +319,11 @@ This is the place where most of your configurations should be done. Unless it is
 explicitly specified thAt A Variable Should be set before a package is loaded,
 you should place your code here."
   (setq powerline-default-separator 'slant)
-  (setq-default dotspacemacs-default-font '("Menlo"
-                                             :size 13
-                                             :weight normal
-                                             :width normal
-                                             :powerline-scale 1.1))
+  ;; (setq-default dotspacemacs-default-font '("Menlo"
+  ;;                                            :size 12
+  ;;                                            :weight normal
+  ;;                                            :width normal
+  ;;                                            :powerline-scale 1.1))
 
   ;; 中文字体是什么？
   ;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -363,18 +363,25 @@ you should place your code here."
   (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
   (global-set-key (kbd "s-<down>") 'end-of-buffer)
 
-  (global-set-key (kbd "s-]")  'alternate-window)
-  (global-set-key (kbd "s-[")  'alternate-window)
+  (global-set-key (kbd "s-]")  'next-multiframe-window)
+  (global-set-key (kbd "s-[")  'previous-multiframe-window)
   (global-set-key (kbd "s-{")  'evil-prev-buffer)
   (global-set-key (kbd "s-}")  'evil-next-buffer)
 
   ;; edit
   (global-set-key (kbd "s-d")  'kill-whole-line)
-  
+
+  ;; file
+  (global-set-key (kbd "s-e")  'helm-buffers-list)
+  (global-set-key (kbd "s-p")  'helm-projectile-find-file)
+  (global-set-key (kbd "s-L")  'kill-current-buffer)
+
+
+
+
+
   ;; disabled
   ;; (global-set-key (kbd "s-j")  'backward-kill-word)
-
-
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Idea from Eclipse's format code: indent-region
@@ -415,8 +422,8 @@ you should place your code here."
 
   (global-set-key (kbd "M-n") 'hold-line-scroll-up)
   (global-set-key (kbd "M-p") 'hold-line-scroll-down)
-  ;(global-set-key (kbd "M-n") 'cua-scroll-up)
-  ;(global-set-key (kbd "M-p") 'cua-scroll-down)
+                                        ;(global-set-key (kbd "M-n") 'cua-scroll-up)
+                                        ;(global-set-key (kbd "M-p") 'cua-scroll-down)
 
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -438,9 +445,6 @@ you should place your code here."
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
-
-
-
   ;; user-config end
   )
 
@@ -453,13 +457,16 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
+ '(blink-cursor-mode nil)
+ '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
- '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb"))
+    (vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb")
+ '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- )
+ '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight normal :height 120 :width normal)))))
