@@ -32,14 +32,14 @@ values."
    ;; List of configuration layers to load.
    dotspacemacs-configuration-layers
    '(
-     (go :variables go-tab-width 4)
-     html
-     javascript
      ;; ----------------------------------------------------------------
      ;; Example of useful layers you may want to use right away.
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
+     (go :variables go-tab-width 4)
+     html
+     javascript
      helm
      auto-completion
      better-defaults
@@ -56,6 +56,7 @@ values."
 
      chinese
      react
+     elivoa
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -125,7 +126,8 @@ values."
    ;; List sizes may be nil, in which case
    ;; `spacemacs-buffer-startup-lists-length' takes effect.
    dotspacemacs-startup-lists '((recents . 5)
-                                (projects . 7))
+                                (projects . 7)
+                                (todos . 5))
    ;; True if the home buffer should respond to resize events.
    dotspacemacs-startup-buffer-responsive t
    ;; Default major mode of the scratch buffer (default `text-mode')
@@ -140,11 +142,13 @@ values."
    ;; Default font, or prioritized list of fonts. `powerline-scale' allows to
    ;; quickly tweak the mode-line size to make separators look not too crappy.
    ;; Source Code Pro （测试中文字体的好不好看啊）
-   dotspacemacs-default-font '("Menlo"
-                               :size 12
+   dotspacemacs-default-font '("Fantasque Sans Mono"
+                               :size 14
                                :weight normal
                                :width normal
                                :powerline-scale 1.1)
+   ;; Menlo
+
    ;; The leader key
    dotspacemacs-leader-key "SPC"
    ;; The key used for Emacs commands (M-x) (after pressing on the leader key).
@@ -267,14 +271,14 @@ values."
    ;;                       text-mode
    ;;   :size-limit-kb 1000)
    ;; (default nil)
-   dotspacemacs-line-numbers nil
+   dotspacemacs-line-numbers t
 
    ;; Code folding method. Possible values are `evil' and `origami'.
    ;; (default 'evil)
    dotspacemacs-folding-method 'evil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
-   dotspacemacs-smartparens-strict-mode t
+   dotspacemacs-smartparens-strict-mode nil
    ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
    ;; over any automatically added closing parenthesis, bracket, quote, etc…
    ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
@@ -318,12 +322,20 @@ layers configuration.
 This is the place where most of your configurations should be done. Unless it is
 explicitly specified thAt A Variable Should be set before a package is loaded,
 you should place your code here."
+
+  ;; (add-to-list 'load-path "~/.spacemacs/lisp/")
+  ;; (require 'init-go)
+
   (setq powerline-default-separator 'slant)
   ;; (setq-default dotspacemacs-default-font '("Menlo"
   ;;                                            :size 12
   ;;                                            :weight normal
   ;;                                            :width normal
   ;;                                            :powerline-scale 1.1))
+
+  ;; default theme
+  ;; (setq-default dotspacemacs-themes '(spacemacs-light leuven zenburn))
+
 
   ;; 中文字体是什么？
   ;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
@@ -333,8 +345,7 @@ you should place your code here."
 
   ;; Note: The Hiragino Sans GB is bundled with MacOS X.
   ;; If you are not using MacOS X, you should change it to another Chinese font name.
-  (spacemacs//set-monospaced-font  "Hiragino Sans GB" "Source Code Pro" 14 16)
-
+  (spacemacs//set-monospaced-font  "Fantasque Sans Mono" "Source Code Pro" 14 16)
 
   ;; 鼠标设置, 不要跳屏
   (setq scroll-margin 5
@@ -368,26 +379,86 @@ you should place your code here."
   (global-set-key (kbd "s-{")  'evil-prev-buffer)
   (global-set-key (kbd "s-}")  'evil-next-buffer)
 
-  ;; edit
-  (global-set-key (kbd "s-d")  'kill-whole-line)
-  ;; (global-set-key (kbd "C-s-268632076")  'llll) 
-  (global-set-key (kbd "s-L")  'kill-current-buffer)
-  (global-set-key (kbd "C-s-268632076")  'kill-current-buffer) ;; s-c-L
+  (global-set-key (kbd "C-;")  'avy-goto-char-timer)
 
-  ;; file
+  ;; Files & buffers
+  (global-set-key (kbd "s-o")  'ibuffer)
   (global-set-key (kbd "s-e")  'helm-buffers-list)
   (global-set-key (kbd "s-p")  'helm-projectile-find-file)
+  (global-set-key (kbd "s-P")  'helm-projectile-find-file-in-known-projects)
+
+  ;; edit
+  (global-set-key (kbd "s-d")  'kill-whole-line)
+  ;; (global-set-key (kbd "C-s-268632076")  'llll)
+  (global-set-key (kbd "s-L")  'kill-current-buffer)
+  ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
+  (global-set-key (kbd "s-/")  'evilnc-comment-operator)
 
 
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; golang
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
+  (add-hook
+   'go-mode-hook
+   '(lambda ()
 
-  ;; disabled
+      ;; Go specific key bindings.
+      (local-set-key (kbd "s-F") 'gofmt)         ; format buffer
+      (local-set-key (kbd "s-r") 'go)            ;; run buffer
+      (local-set-key (kbd "s-C") 'go-fix-buffer) ;;
+      (local-set-key (kbd "s-O") 'go-remove-unused-imports) ;;
+      (local-set-key (kbd "s-i") 'go-import-add)            ;;
+      (local-set-key (kbd "M-.") 'godef-jump)               ;;
+      (local-set-key (kbd "M->") 'godef-jump-other-window)  ;;
+
+      ;; enable go-eldoc mode
+      (go-eldoc-setup)
+
+      ;; Other
+      (setq show-trailing-whitespace nil)
+      (setq default-tab-width 4)
+      (setq tab-width 4)
+      (setq indent-tabs-mode 1)
+
+      ;; gocode
+      (auto-complete-mode 1)
+      (setq ac-sources '(ac-source-go))
+
+      ;; Imenu & Speedbar
+      (setq imenu-generic-expression
+            '(("type" "^type *\\([^ \t\n\r\f]*\\)" 1)
+              ("func" "^func *\\(.*\\) {" 1)))
+      (imenu-add-to-menubar "Index")
+
+      ;; Outline mode
+
+      ;; Level 3: //.  use this to devide the file into major sections
+      ;; Level 4: //   followed by at least two characters
+      ;; Level 4: package
+      ;; Level 4: import
+      ;; Level 4: const
+      ;; Level 4: var  followed by at least one character
+      ;; Level 4: type
+      ;; Level 4: func
+      ;; Level 5 and above: tab-indented lines with at least five characters
+      (make-local-variable 'outline-regexp)
+      (setq outline-regexp "//\\.\\|//[^\r\n\f][^\r\n\f]\\|pack\\|func\\|impo\\|cons\\|var[^\r\n\f]\\|type\\|\t\t*[^\r\n\f]\\{4\\}")
+      (outline-minor-mode 1)
+      (local-set-key "\M-a" 'outline-previous-visible-heading)
+      (local-set-key "\M-e" 'outline-next-visible-heading)
+      )
+   )
+
+  
+  ;; disabled key bindings here..
+  ;;
   ;; (global-set-key (kbd "s-j")  'backward-kill-word)
 
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; Idea from Eclipse's format code: indent-region
   ;; @TODO: if selected indent selection otherwise indent buffer.
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   (defun indent-buffer ()
     "Indent the whole buffer."
     (interactive)
@@ -423,9 +494,8 @@ you should place your code here."
 
   (global-set-key (kbd "M-n") 'hold-line-scroll-up)
   (global-set-key (kbd "M-p") 'hold-line-scroll-down)
-                                        ;(global-set-key (kbd "M-n") 'cua-scroll-up)
-                                        ;(global-set-key (kbd "M-p") 'cua-scroll-down)
-
+  ;; (global-set-key (kbd "M-n") 'cua-scroll-up)
+  ;; (global-set-key (kbd "M-p") 'cua-scroll-down)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; DEV
@@ -446,6 +516,9 @@ you should place your code here."
     (add-to-list 'web-mode-indentation-params '("lineup-concats" . nil))
     (add-to-list 'web-mode-indentation-params '("lineup-calls" . nil)))
 
+
+
+  ;; -------------------------------------------------------------------------------------
   ;; user-config end
   )
 
@@ -462,8 +535,9 @@ you should place your code here."
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (color-theme-sanityinc-tomorrow hydra dash vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb")
+ '(show-paren-mode t)
  '(tool-bar-mode nil))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.
