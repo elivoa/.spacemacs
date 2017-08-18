@@ -18,7 +18,7 @@
 ;; (setq default-frame-alist '((height . 72) (width . 112)))
 (setq default-frame-alist '((height . 78) (width . 112)))
 
-(setq-default default-directory "~")
+;; (setq-default default-directory "~")
 
 (blink-cursor-mode 0)
 
@@ -75,7 +75,6 @@
 ;; edit commands
 (global-set-key (kbd "M-n") 'cua-scroll-up)
 (global-set-key (kbd "M-p") 'cua-scroll-down)
-(global-set-key (kbd "M-v") 'cua-scroll-down)
 
 ;; window / frames
 (global-set-key (kbd "C-s-1")  'delete-other-windows)

@@ -348,7 +348,7 @@ you should place your code here."
   (spacemacs//set-monospaced-font  "Fantasque Sans Mono" "Source Code Pro" 14 16)
 
   ;; 鼠标设置, 不要跳屏
-  (setq scroll-margin 5
+  (setq scroll-margin 4
         scroll-conservatively 10000)
 
   ;; When a file actually ends, put empty line markers into the left hand side.

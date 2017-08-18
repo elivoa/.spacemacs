@@ -1,3 +1,4 @@
 #!/bin/sh
 
-ln -sf ~/.spacemacs/private .emacs.d/private
+cd .emacs.d/
+ln -sf ~/.spacemacs/private private
