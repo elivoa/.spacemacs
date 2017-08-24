@@ -53,6 +53,8 @@
 ;; (global-set-key (kbd "s-<escape>")  'ns-next-frame)
 ;; (global-set-key (kbd "s-1")  'ns-prev-frame)
 
+;; File and buffers
+(global-set-key (kbd "s-r")  'helm-recentf)
 (global-set-key (kbd "s-e")  'ido-switch-buffer) ; C-x e
 (global-set-key (kbd "s-R")  'ido-switch-buffer) ; C-x e
 ;;(global-set-key (kbd "s-R")  'ido-switch-buffer-other-frame) ; C-x e
@@ -94,6 +96,44 @@
 (global-set-key (kbd "M-<down>") 'md/move-lines-down)
 (global-set-key (kbd "M-s-<up>")  'md/duplicate-up)
 (global-set-key (kbd "M-s-<down>")  'md/duplicate-down)
+
+;; Move form init.el
+(global-set-key (kbd "M-n") 'hold-line-scroll-up)
+(global-set-key (kbd "M-p") 'hold-line-scroll-down)
+;; (global-set-key (kbd "M-n") 'cua-scroll-up)
+;; (global-set-key (kbd "M-p") 'cua-scroll-down)
+  
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+  ;; Key bindings for mac os x
+  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+  ;; Basic Navigation & Edit
+  (global-set-key (kbd "s-<right>")  'move-end-of-line)
+  (global-set-key (kbd "s-<left>")  'move-beginning-of-line)
+  (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+  (global-set-key (kbd "s-<down>") 'end-of-buffer)
+
+  (global-set-key (kbd "s-]")  'next-multiframe-window)
+  (global-set-key (kbd "s-[")  'previous-multiframe-window)
+  (global-set-key (kbd "s-{")  'evil-prev-buffer)
+  (global-set-key (kbd "s-}")  'evil-next-buffer)
+
+  (global-set-key (kbd "C-;")  'avy-goto-char-timer)
+
+  ;; Files & buffers
+  (global-set-key (kbd "s-o")  'ibuffer)
+  (global-set-key (kbd "s-e")  'helm-buffers-list)
+  (global-set-key (kbd "s-p")  'helm-projectile-find-file)
+  (global-set-key (kbd "s-P")  'helm-projectile-find-file-in-known-projects)
+
+  ;; edit
+  (global-set-key (kbd "s-d")  'kill-whole-line)
+  ;; (global-set-key (kbd "C-s-268632076")  'llll)
+  (global-set-key (kbd "s-L")  'kill-current-buffer)
+  ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
+  (global-set-key (kbd "s-/")  'evilnc-comment-operator)
+
+
 
 (provide 'elivoa-key)
 ;;; elivoa-key.el ends here

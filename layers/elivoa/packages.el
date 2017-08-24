@@ -60,10 +60,15 @@ Each entry is either:
       - A list beginning with the symbol `recipe' is a melpa
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
-(add-to-list 'load-path "~/.emacs.d/private/elivoa")
+(add-to-list 'load-path "~/.spacemacs.d/layers/elivoa/")
 (require 'elivoa-key)
+(require 'elivoa-editor)
 
-(global-set-key (kbd "s-r")  'helm-recentf)
+; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+; (setq exec-path (append exec-path '("/usr/local/bin")))
+
+;; TODO move this out
+
 
 
 ;;; packages.el ends here

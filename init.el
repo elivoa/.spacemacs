@@ -54,7 +54,7 @@ values."
      syntax-checking
      version-control
 
-     chinese
+     ;; chinese
      react
      elivoa
      )
@@ -326,7 +326,6 @@ you should place your code here."
   ;; (add-to-list 'load-path "~/.spacemacs/lisp/")
   ;; (require 'init-go)
 
-  (setq powerline-default-separator 'slant)
   ;; (setq-default dotspacemacs-default-font '("Menlo"
   ;;                                            :size 12
   ;;                                            :weight normal
@@ -337,63 +336,10 @@ you should place your code here."
   ;; (setq-default dotspacemacs-themes '(spacemacs-light leuven zenburn))
 
 
-  ;; 中文字体是什么？
-  ;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
-  ;;  (set-fontset-font (frame-parameter nil 'font)
-  ;;                    charset (font-spec :family "Microsoft Yahei" :size 16)))
-  (setq-default cursor-type 'bar)
 
   ;; Note: The Hiragino Sans GB is bundled with MacOS X.
   ;; If you are not using MacOS X, you should change it to another Chinese font name.
-  (spacemacs//set-monospaced-font  "Fantasque Sans Mono" "Source Code Pro" 14 16)
-
-  ;; 鼠标设置, 不要跳屏
-  (setq scroll-margin 4
-        scroll-conservatively 10000)
-
-  ;; When a file actually ends, put empty line markers into the left hand side.
-  (setq-default indicate-empty-lines t)
-  (when (not indicate-empty-lines)
-    (toggle-indicate-empty-lines))
-
-  ;; 在fringe上显示一个小箭头指示当前buffer的边界
-  (setq-default indicate-buffer-boundaries 'left)
-
-  (setq echo-keystrokes 0.1)        ; 尽快显示按键序列
-  (setq scroll-margin 5
-        scroll-conservatively 10000)
-  (setq-default indicate-buffer-boundaries 'left)
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Key bindings for mac os x
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-
-  ;; Basic Navigation & Edit
-  (global-set-key (kbd "s-<right>")  'move-end-of-line)
-  (global-set-key (kbd "s-<left>")  'move-beginning-of-line)
-  (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
-  (global-set-key (kbd "s-<down>") 'end-of-buffer)
-
-  (global-set-key (kbd "s-]")  'next-multiframe-window)
-  (global-set-key (kbd "s-[")  'previous-multiframe-window)
-  (global-set-key (kbd "s-{")  'evil-prev-buffer)
-  (global-set-key (kbd "s-}")  'evil-next-buffer)
-
-  (global-set-key (kbd "C-;")  'avy-goto-char-timer)
-
-  ;; Files & buffers
-  (global-set-key (kbd "s-o")  'ibuffer)
-  (global-set-key (kbd "s-e")  'helm-buffers-list)
-  (global-set-key (kbd "s-p")  'helm-projectile-find-file)
-  (global-set-key (kbd "s-P")  'helm-projectile-find-file-in-known-projects)
-
-  ;; edit
-  (global-set-key (kbd "s-d")  'kill-whole-line)
-  ;; (global-set-key (kbd "C-s-268632076")  'llll)
-  (global-set-key (kbd "s-L")  'kill-current-buffer)
-  ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
-  (global-set-key (kbd "s-/")  'evilnc-comment-operator)
-
+  ;;  (spacemacs//set-monospaced-font  "Fantasque Sans Mono" "Source Code Pro" 14 16)
 
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; golang
@@ -450,7 +396,7 @@ you should place your code here."
       )
    )
 
-  
+
   ;; disabled key bindings here..
   ;;
   ;; (global-set-key (kbd "s-j")  'backward-kill-word)
@@ -492,11 +438,6 @@ you should place your code here."
       )
     )
 
-  (global-set-key (kbd "M-n") 'hold-line-scroll-up)
-  (global-set-key (kbd "M-p") 'hold-line-scroll-down)
-  ;; (global-set-key (kbd "M-n") 'cua-scroll-up)
-  ;; (global-set-key (kbd "M-p") 'cua-scroll-down)
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; DEV
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -535,7 +476,8 @@ you should place your code here."
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (color-theme-sanityinc-tomorrow hydra dash vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el paradox orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint info+ indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (paradox info+ with-editor markdown-mode async org-category-capture packed projectile avy color-theme-sanityinc-tomorrow hydra dash vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+ '(paradox-automatically-star t)
  '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
@@ -544,4 +486,4 @@ you should place your code here."
  ;; If you edit it by hand, you could mess it up, so be careful.
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
- '(default ((t (:family "Menlo" :foundry "nil" :slant normal :weight normal :height 120 :width normal)))))
+ '(default ((t (:family "Fantasque Sans Mono" :foundry "nil" :slant normal :weight normal :height 120 :width normal)))))

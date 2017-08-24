@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Sunday, 2015-08-09 20:47:15>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Friday, 2017-08-18 14:48:52>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -17,17 +17,27 @@
 ;; Packaging system -- additional repositories.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "package")
-(package-initialize)
-(add-to-list 'package-archives
-             '("marmalade" . "http://marmalade-repo.org/packages/"))
-(add-to-list 'package-archives
-             '("melpa" . "http://melpa.milkbox.net/packages/") t)
 
-(set-fill-column 999999)
+;; (package-initialize)
+;; (add-to-list 'package-archives
+;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
+;; (add-to-list 'package-archives
+;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
+;; (setq package-archive-enable-alist '(("melpa" deft magit)))
 
-(setq package-archive-enable-alist '(("melpa" deft magit)))
+;; (set-fill-column 999999)
 
 
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Spacemacs Configuration
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+
+(setq powerline-default-separator 'slant)
+
+;; 中文字体是什么？
+;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
+;;  (set-fontset-font (frame-parameter nil 'font)
+;;                    charset (font-spec :family "Microsoft Yahei" :size 16)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Override Purcell's Configuration
@@ -35,17 +45,9 @@
 
 ;; turn off global-whitespace-cleanup-mode, this mode will let .go
 ;; file becaume 8 space tab when save.
-(global-whitespace-cleanup-mode 0)
-
-;; override init-osx-keys
-(when *is-a-mac*
-  (setq mac-command-modifier 'super)
-  (setq mac-option-modifier 'meta)
-  (setq default-input-method "MacOSX")
-  )
+;; (global-whitespace-cleanup-mode 0)
 
 (setq-default cursor-type 'bar)
-
 (setq echo-keystrokes 0.1)        ; 尽快显示按键序列
 ;; (mouse-avoidance-mode 'animate)   ; 光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
 
@@ -96,8 +98,8 @@
       version-control t)
 
 
-(auto-image-file-mode)             ; 让 Emacs 可以直接打开和显示图片。
-(defalias 'yes-or-no-p 'y-or-n-p)
+;; (auto-image-file-mode)             ; 让 Emacs 可以直接打开和显示图片。
+;; (defalias 'yes-or-no-p 'y-or-n-p)
 ;; (show-paren-mode)
 
 
@@ -126,19 +128,18 @@
     )
   )
 
-                                        ;(global-set-key (kbd "M-n") 'hold-line-scroll-up)
-                                        ;(global-set-key (kbd "M-p") 'hold-line-scroll-down)
+;; (global-set-key (kbd "M-n") 'hold-line-scroll-up)
+;; (global-set-key (kbd "M-p") 'hold-line-scroll-down)
 (global-set-key (kbd "M-n") 'cua-scroll-up)
 (global-set-key (kbd "M-p") 'cua-scroll-down)
-
 
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; window-number-mode, M-1 to select window.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-                                        ;(require 'window-number)
-                                        ;(window-number-mode 1)
-                                        ;(window-number-meta-mode 1)
+;; (require 'window-number)
+;; (window-number-mode 1)
+;; (window-number-meta-mode 1)
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -160,8 +161,6 @@
       time-stamp-active t               ; update time-stamps
       time-stamp-warn-inactive t)       ; warn if unable
 
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; about the clickboard
 ;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -180,9 +179,10 @@
 ;; (require 'sr-speedbar)
 ;; (speedbar-add-supported-extension ".go")
 
-(global-set-key (kbd "s-`")  'sr-speedbar-toggle)
-(global-set-key (kbd "s-u")  'sr-speedbar-toggle)
-(global-set-key (kbd "s-U")  'sr-speedbar-toggle)
+;; (global-set-key (kbd "s-`")  'sr-speedbar-toggle)
+;; (global-set-key (kbd "s-u")  'sr-speedbar-toggle)
+;; (global-set-key (kbd "s-U")  'sr-speedbar-toggle)
+
 ;; (setq sr-speedbar-max-width 60
 ;;       sr-speedbar-width-x 60
 ;;       sr-speedbar-auto-refresh t
@@ -195,12 +195,11 @@
 
 
 ;;; Require edit-server
-(require 'edit-server)
-(edit-server-start)
-
+;; (require 'edit-server)
+;; (edit-server-start)
 
 ;; jsmode
-(add-hook
- 'js-mode-hook
- '(lambda ()
-    (setq show-trailing-whitespace nil)))
+;; (add-hook
+;;  'js-mode-hook
+;;  '(lambda ()
+;;     (setq show-trailing-whitespace nil)))
