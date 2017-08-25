@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Friday, 2017-08-18 14:48:52>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Saturday, 2017-08-26 00:35:01>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -18,13 +18,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "package")
 
-;; (package-initialize)
-;; (add-to-list 'package-archives
-;;              '("marmalade" . "http://marmalade-repo.org/packages/"))
-;; (add-to-list 'package-archives
-;;              '("melpa" . "http://melpa.milkbox.net/packages/") t)
-;; (setq package-archive-enable-alist '(("melpa" deft magit)))
-
 ;; (set-fill-column 999999)
 
 
@@ -33,11 +26,6 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
 (setq powerline-default-separator 'slant)
-
-;; 中文字体是什么？
-;;(dolist (charset '(kana han symbol cjk-misc bopomofo))
-;;  (set-fontset-font (frame-parameter nil 'font)
-;;                    charset (font-spec :family "Microsoft Yahei" :size 16)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Override Purcell's Configuration
@@ -71,10 +59,6 @@
 ;; (when window-system
 ;;   (setq frame-title-format '(buffer-file-name "nmnn^o^ %f" ("%b"))))
 
-;;(setq system-time-locale "C")
-;; (setq global-hi-line-mode t) ;; 行高亮模式
-
-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Idea from Eclipse's format code: indent-region
 ;; @TODO: if selected indent selection otherwise indent buffer.
@@ -96,12 +80,6 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
-
-
-;; (auto-image-file-mode)             ; 让 Emacs 可以直接打开和显示图片。
-;; (defalias 'yes-or-no-p 'y-or-n-p)
-;; (show-paren-mode)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; scroll functions
@@ -132,14 +110,6 @@
 ;; (global-set-key (kbd "M-p") 'hold-line-scroll-down)
 (global-set-key (kbd "M-n") 'cua-scroll-up)
 (global-set-key (kbd "M-p") 'cua-scroll-down)
-
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; window-number-mode, M-1 to select window.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; (require 'window-number)
-;; (window-number-mode 1)
-;; (window-number-meta-mode 1)
 
 
 ;;;;;;;;;;;;;;;;;;
@@ -174,25 +144,9 @@
 (setq x-select-enable-clipboard t)
 
 
-;; speedbar
-;; (speedbar 1)
-;; (require 'sr-speedbar)
-;; (speedbar-add-supported-extension ".go")
-
-;; (global-set-key (kbd "s-`")  'sr-speedbar-toggle)
-;; (global-set-key (kbd "s-u")  'sr-speedbar-toggle)
-;; (global-set-key (kbd "s-U")  'sr-speedbar-toggle)
-
-;; (setq sr-speedbar-max-width 60
-;;       sr-speedbar-width-x 60
-;;       sr-speedbar-auto-refresh t
-;;       )
-
 ;; _______________________________
 (provide 'elivoa-editor)
 ;;; elivoa-editor.el ends here
-
-
 
 ;;; Require edit-server
 ;; (require 'edit-server)
