@@ -3,7 +3,7 @@
 ;;;   Including basic key mapping
 ;;;
 ;; -*- coding: utf-8 -*-
-;; Time-stamp: <[elivoa-key.el] Elivoa @ Thursday, 2017-01-05 11:12:23>
+;; Time-stamp: <[elivoa-key.el] Elivoa @ Saturday, 2017-08-26 11:57:13>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; basic settings of Emacs.
 ;;
@@ -14,9 +14,6 @@
 (setq user-mail-address "elivoa@gmail.com")
 
 
-;; The first thing is set frame size
-;; (setq default-frame-alist '((height . 72) (width . 112)))
-(setq default-frame-alist '((height . 78) (width . 112)))
 
 ;; (setq-default default-directory "~")
 
@@ -102,36 +99,36 @@
 (global-set-key (kbd "M-p") 'hold-line-scroll-down)
 ;; (global-set-key (kbd "M-n") 'cua-scroll-up)
 ;; (global-set-key (kbd "M-p") 'cua-scroll-down)
-  
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Key bindings for mac os x
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  ;; Basic Navigation & Edit
-  (global-set-key (kbd "s-<right>")  'move-end-of-line)
-  (global-set-key (kbd "s-<left>")  'move-beginning-of-line)
-  (global-set-key (kbd "s-<up>") 'beginning-of-buffer)
-  (global-set-key (kbd "s-<down>") 'end-of-buffer)
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; Key bindings for mac os x
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 
-  (global-set-key (kbd "s-]")  'next-multiframe-window)
-  (global-set-key (kbd "s-[")  'previous-multiframe-window)
-  (global-set-key (kbd "s-{")  'evil-prev-buffer)
-  (global-set-key (kbd "s-}")  'evil-next-buffer)
+;; Basic Navigation & Edit
+(global-set-key (kbd "s-<right>")  'move-end-of-line)
+(global-set-key (kbd "s-<left>")  'move-beginning-of-line)
+(global-set-key (kbd "s-<up>") 'beginning-of-buffer)
+(global-set-key (kbd "s-<down>") 'end-of-buffer)
 
-  (global-set-key (kbd "C-;")  'avy-goto-char-timer)
+(global-set-key (kbd "s-]")  'next-multiframe-window)
+(global-set-key (kbd "s-[")  'previous-multiframe-window)
+(global-set-key (kbd "s-{")  'evil-prev-buffer)
+(global-set-key (kbd "s-}")  'evil-next-buffer)
 
-  ;; Files & buffers
-  (global-set-key (kbd "s-o")  'ibuffer)
-  (global-set-key (kbd "s-e")  'helm-buffers-list)
-  (global-set-key (kbd "s-p")  'helm-projectile-find-file)
-  (global-set-key (kbd "s-P")  'helm-projectile-find-file-in-known-projects)
+(global-set-key (kbd "C-;")  'avy-goto-char-timer)
 
-  ;; edit
-  (global-set-key (kbd "s-d")  'kill-whole-line)
-  ;; (global-set-key (kbd "C-s-268632076")  'llll)
-  (global-set-key (kbd "s-L")  'kill-current-buffer)
-  ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
-  (global-set-key (kbd "s-/")  'evilnc-comment-operator)
+;; Files & buffers
+(global-set-key (kbd "s-o")  'ibuffer)
+(global-set-key (kbd "s-e")  'helm-buffers-list)
+(global-set-key (kbd "s-p")  'helm-projectile-find-file)
+(global-set-key (kbd "s-P")  'helm-projectile-find-file-in-known-projects)
+
+;; edit
+(global-set-key (kbd "s-d")  'kill-whole-line)
+;; (global-set-key (kbd "C-s-268632076")  'llll)
+(global-set-key (kbd "s-L")  'kill-current-buffer)
+;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
+(global-set-key (kbd "s-/")  'evilnc-comment-operator)
 
 
 

@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Saturday, 2017-08-26 00:35:01>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Saturday, 2017-08-26 11:53:26>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -20,6 +20,8 @@
 
 ;; (set-fill-column 999999)
 
+;; Set frame size
+(setq default-frame-alist '((height . 78) (width . 238)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Spacemacs Configuration
@@ -44,7 +46,7 @@
 ;;       indent-tabs-mode nil)
 
 ;; 鼠标设置, 不要跳屏
-(setq scroll-margin 5
+(setq scroll-margin 4
       scroll-conservatively 10000)
 
 ;; When a file actually ends, put empty line markers into the left hand side.

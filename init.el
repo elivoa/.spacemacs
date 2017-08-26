@@ -36,7 +36,10 @@ values."
      ;; Uncomment some layer names and press <SPC f e R> (Vim style) or
      ;; <M-m f e R> (Emacs style) to install them.
      ;; ----------------------------------------------------------------
-     (go :variables go-tab-width 4)
+     (go :variables
+         go-tab-width 4
+         go-use-gometalinter)
+
      html
      javascript
      helm
@@ -117,7 +120,7 @@ values."
    ;; directory. A string value must be a path to an image format supported
    ;; by your Emacs build.
    ;; If the value is nil then no banner is displayed. (default 'official)
-   dotspacemacs-startup-banner 'official
+   dotspacemacs-startup-banner 'random
    ;; List of items to show in startup buffer or an association list of
    ;; the form `(list-type . list-size)`. If nil then it is disabled.
    ;; Possible values for list-type are:
@@ -334,8 +337,6 @@ you should place your code here."
   ;; default theme
   ;; (setq-default dotspacemacs-themes '(spacemacs-light leuven zenburn))
 
-
-
   ;; Note: The Hiragino Sans GB is bundled with MacOS X.
   ;; If you are not using MacOS X, you should change it to another Chinese font name.
   ;;  (spacemacs//set-monospaced-font  "Fantasque Sans Mono" "Source Code Pro" 14 16)
@@ -400,43 +401,6 @@ you should place your code here."
   ;;
   ;; (global-set-key (kbd "s-j")  'backward-kill-word)
 
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; Idea from Eclipse's format code: indent-region
-  ;; @TODO: if selected indent selection otherwise indent buffer.
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (defun indent-buffer ()
-    "Indent the whole buffer."
-    (interactive)
-    (save-excursion
-      (indent-region (point-min) (point-max) nil)))
-
-  (global-set-key (kbd "s-F") 'indent-buffer)
-
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  ;; scroll functions
-  ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-  (defun hold-line-scroll-up()
-    "Scroll the page with the cursor in the same line"
-    (interactive)
-    ;; move the cursor also
-    (let ((tmp (current-column)))
-      (scroll-up 18)
-      (line-move-to-column tmp)
-      ;; (forward-line -18)
-      )
-    )
-
-  (defun hold-line-scroll-down()
-    "Scroll the page with the cursor in the same line"
-    (interactive)
-    ;; move the cursor also
-    (let ((tmp (current-column)))
-      (scroll-down 18)
-      (line-move-to-column tmp)
-      ;; (forward-line 18)
-      )
-    )
-
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
   ;; DEV
   ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
@@ -475,9 +439,15 @@ you should place your code here."
  '(column-number-mode t)
  '(package-selected-packages
    (quote
-    (paradox info+ with-editor markdown-mode async org-category-capture packed projectile avy color-theme-sanityinc-tomorrow hydra dash vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
+    (move-dup paradox info+ with-editor markdown-mode async org-category-capture packed projectile avy color-theme-sanityinc-tomorrow hydra dash vmd-mode yasnippet smartparens evil flycheck company helm helm-core org-plus-contrib pangu-spacing find-by-pinyin-dired chinese-pyim chinese-pyim-basedict ace-pinyin pinyinlib go-guru go-eldoc company-go go-mode web-mode tagedit slim-mode scss-mode sass-mode pug-mode less-css-mode helm-css-scss haml-mode emmet-mode company-web web-completion-data web-beautify livid-mode skewer-mode simple-httpd json-mode json-snatcher json-reformat js2-refactor multiple-cursors js2-mode js-doc company-tern dash-functional tern coffee-mode xterm-color ws-butler winum which-key volatile-highlights vi-tilde-fringe uuidgen use-package unfill toc-org spaceline smeargle shell-pop restart-emacs rainbow-delimiters popwin persp-mode pcre2el orgit org-projectile org-present org-pomodoro org-download org-bullets open-junk-file neotree mwim multi-term move-text mmm-mode markdown-toc magit-gitflow macrostep lorem-ipsum linum-relative link-hint indent-guide hungry-delete htmlize hl-todo highlight-parentheses highlight-numbers highlight-indentation hide-comnt help-fns+ helm-themes helm-swoop helm-projectile helm-mode-manager helm-make helm-gitignore helm-flx helm-descbinds helm-company helm-c-yasnippet helm-ag google-translate golden-ratio gnuplot gitconfig-mode gitattributes-mode git-timemachine git-messenger git-link git-gutter-fringe git-gutter-fringe+ gh-md fuzzy flyspell-correct-helm flycheck-pos-tip flx-ido fill-column-indicator fancy-battery eyebrowse expand-region exec-path-from-shell evil-visualstar evil-visual-mark-mode evil-unimpaired evil-tutor evil-surround evil-search-highlight-persist evil-numbers evil-nerd-commenter evil-mc evil-matchit evil-magit evil-lisp-state evil-indent-plus evil-iedit-state evil-exchange evil-escape evil-ediff evil-args evil-anzu eval-sexp-fu eshell-z eshell-prompt-extras esh-help elisp-slime-nav dumb-jump diff-hl define-word company-statistics column-enforce-mode clean-aindent-mode auto-yasnippet auto-highlight-symbol auto-dictionary auto-compile aggressive-indent adaptive-wrap ace-window ace-link ace-jump-helm-line ac-ispell)))
  '(paradox-automatically-star t)
  '(paradox-github-token "8472a73a15b4814719965d376cc18ad017ef7acb")
  '(show-paren-mode t)
  '(tool-bar-mode nil))
 
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

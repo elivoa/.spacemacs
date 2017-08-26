@@ -31,6 +31,8 @@
 
 (defconst elivoa-packages
   '(
+    ;; move-dup
+    ;; (move-dup :location elpa)
 
     )
   "The list of Lisp packages required by the elivoa layer.
@@ -64,11 +66,11 @@ Each entry is either:
 (require 'elivoa-key)
 (require 'elivoa-editor)
 
-; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
-; (setq exec-path (append exec-path '("/usr/local/bin")))
-
-;; TODO move this out
+;; Othe mode
+(require 'move-dup)
 
 
+;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))
+;; (setq exec-path (append exec-path '("/usr/local/bin")))
 
 ;;; packages.el ends here
