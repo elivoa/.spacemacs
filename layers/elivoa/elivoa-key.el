@@ -3,23 +3,12 @@
 ;;;   Including basic key mapping
 ;;;
 ;; -*- coding: utf-8 -*-
-;; Time-stamp: <[elivoa-key.el] Elivoa @ Saturday, 2017-08-26 11:57:13>
+;; Time-stamp: <[elivoa-key.el] Elivoa @ Sunday, 2017-08-27 00:25:07>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; basic settings of Emacs.
 ;;
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Code:
-
-(setq user-full-name "Bo GAO")
-(setq user-mail-address "elivoa@gmail.com")
-
-
-
-;; (setq-default default-directory "~")
-
-(blink-cursor-mode 0)
-
-(setq ns-pop-up-frames nil)
 
 ;; (setq default-major-mode 'text-mode) ; default major mode
 

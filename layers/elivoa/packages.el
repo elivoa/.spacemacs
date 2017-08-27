@@ -31,6 +31,7 @@
 
 (defconst elivoa-packages
   '(
+    ;; TODO make this work.
     ;; move-dup
     ;; (move-dup :location elpa)
 
@@ -63,11 +64,12 @@ Each entry is either:
         recipe.  See: https://github.com/milkypostman/melpa#recipe-format")
 
 (add-to-list 'load-path "~/.spacemacs.d/layers/elivoa/")
-(require 'elivoa-key)
 (require 'elivoa-editor)
+(require 'elivoa-key)
 
 ;; Othe mode
-(require 'move-dup)
+;; (require 'move-dup)
+;; (global-move-dup-mode)
 
 
 ;; (setenv "PATH" (concat (getenv "PATH") ":/usr/local/bin"))

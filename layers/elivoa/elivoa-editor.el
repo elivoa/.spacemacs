@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Saturday, 2017-08-26 11:53:26>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Sunday, 2017-08-27 00:32:43>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -10,18 +10,26 @@
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;; Code:
 
+(setq user-full-name "Bo GAO")
+(setq user-mail-address "elivoa@gmail.com")
+
+;; (setq-default default-directory "~")
+
+;; Set frame size
+(setq default-frame-alist '((height . 78) (width . 238)))
+(setq ns-pop-up-frames nil)
+
+(blink-cursor-mode 0)
+
 (defalias 'eval- 'eval-region) ;; M-x eval
 (defalias 'load- 'load-file) ;; M-x load
+
+;; (set-fill-column 999999)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Packaging system -- additional repositories.
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 (load "package")
-
-;; (set-fill-column 999999)
-
-;; Set frame size
-(setq default-frame-alist '((height . 78) (width . 238)))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Spacemacs Configuration
@@ -38,6 +46,9 @@
 ;; (global-whitespace-cleanup-mode 0)
 
 (setq-default cursor-type 'bar)
+(setq cursor-type 'bar)
+(setq-default indicate-buffer-boundaries 'left) ; 在fringe上显示一个小箭头指示当前buffer的边界
+
 (setq echo-keystrokes 0.1)        ; 尽快显示按键序列
 ;; (mouse-avoidance-mode 'animate)   ; 光标靠近鼠标指针时，让鼠标指针自动让开，别挡住视线
 
@@ -49,13 +60,11 @@
 (setq scroll-margin 4
       scroll-conservatively 10000)
 
-;; When a file actually ends, put empty line markers into the left hand side.
+;; When a file actually ends, put emlpty line markers into the left hand side.
 (setq-default indicate-empty-lines t)
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines))
 
-;; 在fringe上显示一个小箭头指示当前buffer的边界
-(setq-default indicate-buffer-boundaries 'left)
 
 ;; Set window title.
 ;; (when window-system
@@ -82,37 +91,6 @@
       kept-new-versions 6
       kept-old-versions 2
       version-control t)
-
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-;; scroll functions
-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
-(defun hold-line-scroll-up()
-  "Scroll the page with the cursor in the same line"
-  (interactive)
-  ;; move the cursor also
-  (let ((tmp (current-column)))
-    (scroll-up 18)
-    (line-move-to-column tmp)
-    ;; (forward-line -18)
-    )
-  )
-
-(defun hold-line-scroll-down()
-  "Scroll the page with the cursor in the same line"
-  (interactive)
-  ;; move the cursor also
-  (let ((tmp (current-column)))
-    (scroll-down 18)
-    (line-move-to-column tmp)
-    ;; (forward-line 18)
-    )
-  )
-
-;; (global-set-key (kbd "M-n") 'hold-line-scroll-up)
-;; (global-set-key (kbd "M-p") 'hold-line-scroll-down)
-(global-set-key (kbd "M-n") 'cua-scroll-up)
-(global-set-key (kbd "M-p") 'cua-scroll-down)
-
 
 ;;;;;;;;;;;;;;;;;;
 ;; Recent files
@@ -144,6 +122,37 @@
 (delete-selection-mode t)
 (transient-mark-mode t)
 (setq x-select-enable-clipboard t)
+
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+;; scroll functions
+;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
+(defun hold-line-scroll-up()
+  "Scroll the page with the cursor in the same line"
+  (interactive)
+  ;; move the cursor also
+  (let ((tmp (current-column)))
+    (scroll-up 18)
+    (line-move-to-column tmp)
+    ;; (forward-line -18)
+    )
+  )
+
+(defun hold-line-scroll-down()
+  "Scroll the page with the cursor in the same line"
+  (interactive)
+  ;; move the cursor also
+  (let ((tmp (current-column)))
+    (scroll-down 18)
+    (line-move-to-column tmp)
+    ;; (forward-line 18)
+    )
+  )
+
+;; (global-set-key (kbd "M-n") 'hold-line-scroll-up)
+;; (global-set-key (kbd "M-p") 'hold-line-scroll-down)
+(global-set-key (kbd "M-n") 'cua-scroll-up)
+(global-set-key (kbd "M-p") 'cua-scroll-down)
+
 
 
 ;; _______________________________
