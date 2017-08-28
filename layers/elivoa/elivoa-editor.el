@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Sunday, 2017-08-27 00:32:43>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Sunday, 2017-08-27 15:08:06>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -18,6 +18,7 @@
 ;; Set frame size
 (setq default-frame-alist '((height . 78) (width . 238)))
 (setq ns-pop-up-frames nil)
+(setq inhibit-startup-screen t) ;隐藏启动显示画面
 
 (blink-cursor-mode 0)
 
@@ -25,6 +26,8 @@
 (defalias 'load- 'load-file) ;; M-x load
 
 ;; (set-fill-column 999999)
+
+(setq kill-ring-max 800)
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Packaging system -- additional repositories.
@@ -65,10 +68,9 @@
 (when (not indicate-empty-lines)
   (toggle-indicate-empty-lines))
 
-
 ;; Set window title.
-;; (when window-system
-;;   (setq frame-title-format '(buffer-file-name "nmnn^o^ %f" ("%b"))))
+(when window-system
+  (setq frame-title-format '(buffer-file-name "[ nnmn^o^  %I] %f" ("%b") )))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Idea from Eclipse's format code: indent-region
@@ -79,6 +81,7 @@
   (interactive)
   (save-excursion
     (indent-region (point-min) (point-max) nil)))
+
 
 (global-set-key (kbd "s-F") 'indent-buffer)
 
@@ -99,7 +102,6 @@
 (recentf-mode 1)
 (setq recentf-max-menu-items 25)
 (global-set-key "\C-x\ \C-r" 'recentf-open-files)
-
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; Time-stamp configure
@@ -157,14 +159,5 @@
 
 ;; _______________________________
 (provide 'elivoa-editor)
+
 ;;; elivoa-editor.el ends here
-
-;;; Require edit-server
-;; (require 'edit-server)
-;; (edit-server-start)
-
-;; jsmode
-;; (add-hook
-;;  'js-mode-hook
-;;  '(lambda ()
-;;     (setq show-trailing-whitespace nil)))

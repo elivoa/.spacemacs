@@ -3,7 +3,7 @@
 ;;;   Including basic key mapping
 ;;;
 ;; -*- coding: utf-8 -*-
-;; Time-stamp: <[elivoa-key.el] Elivoa @ Sunday, 2017-08-27 00:25:07>
+;; Time-stamp: <[elivoa-key.el] Elivoa @ Sunday, 2017-08-27 12:33:19>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; basic settings of Emacs.
 ;;
@@ -117,7 +117,8 @@
 ;; (global-set-key (kbd "C-s-268632076")  'llll)
 (global-set-key (kbd "s-L")  'kill-current-buffer)
 ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
-(global-set-key (kbd "s-/")  'evilnc-comment-operator)
+;; (global-set-key (kbd "s-/")  'evilnc-comment-operator)
+(global-set-key (kbd "s-/")  'comment-line)
 
 
 

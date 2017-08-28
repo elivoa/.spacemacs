@@ -354,7 +354,7 @@ you should place your code here."
 
       ;; Go specific key bindings.
       (local-set-key (kbd "s-F") 'gofmt)         ; format buffer
-      (local-set-key (kbd "s-r") 'go)            ;; run buffer
+      (local-set-key (kbd "s-r") 'go-run-main)            ;; run buffer
       (local-set-key (kbd "s-C") 'go-fix-buffer) ;;
       (local-set-key (kbd "s-O") 'go-remove-unused-imports) ;;
       (local-set-key (kbd "s-i") 'go-import-add)            ;;
