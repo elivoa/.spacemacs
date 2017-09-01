@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Sunday, 2017-08-27 15:08:06>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Friday, 2017-09-01 01:12:07>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -60,8 +60,22 @@
 ;;       indent-tabs-mode nil)
 
 ;; 鼠标设置, 不要跳屏
-(setq scroll-margin 4
-      scroll-conservatively 10000)
+(setq redisplay-dont-pause t
+      scroll-margin 4
+      scroll-step 1
+      scroll-conservatively 10000
+      scroll-preserve-screen-position 1)
+
+(defun smooth-scroll (increment)
+  (scroll-up increment) (sit-for 0.05)
+  (scroll-up increment) (sit-for 0.02)
+  (scroll-up increment) (sit-for 0.02)
+  (scroll-up increment) (sit-for 0.05)
+  (scroll-up increment) (sit-for 0.06)
+  (scroll-up increment))
+
+(global-set-key [(mouse-5)] '(lambda () (interactive) (smooth-scroll 1)))
+(global-set-key [(mouse-4)] '(lambda () (interactive) (smooth-scroll -1)))
 
 ;; When a file actually ends, put emlpty line markers into the left hand side.
 (setq-default indicate-empty-lines t)
@@ -133,7 +147,7 @@
   (interactive)
   ;; move the cursor also
   (let ((tmp (current-column)))
-    (scroll-up 18)
+    (scroll-up 8)
     (line-move-to-column tmp)
     ;; (forward-line -18)
     )
@@ -144,7 +158,7 @@
   (interactive)
   ;; move the cursor also
   (let ((tmp (current-column)))
-    (scroll-down 18)
+    (scroll-down 8)
     (line-move-to-column tmp)
     ;; (forward-line 18)
     )
