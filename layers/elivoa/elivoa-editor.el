@@ -1,7 +1,7 @@
 ;;; package --- elivoa-editor.el
 ;;; Commentary:
 ;;; -*- coding: utf-8 -*-
-;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Friday, 2017-09-01 01:12:07>
+;;; Time-stamp: <[elivoa-editor.el] Elivoa @ Friday, 2017-09-01 20:59:05>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;
 ;; Editor Configuration
@@ -22,8 +22,8 @@
 
 (blink-cursor-mode 0)
 
-(defalias 'eval- 'eval-region) ;; M-x eval
-(defalias 'load- 'load-file) ;; M-x load
+;; (defalias 'eval- 'eval-region) ;; M-x eval
+;; (defalias 'load- 'load-file) ;; M-x load
 
 ;; (set-fill-column 999999)
 

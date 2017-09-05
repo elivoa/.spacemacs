@@ -66,6 +66,7 @@ Each entry is either:
 (add-to-list 'load-path "~/.spacemacs.d/layers/elivoa/")
 (require 'elivoa-editor)
 (require 'elivoa-key)
+(require 'elivoa-dev)
 
 ;; Othe mode
 ;; (require 'move-dup)

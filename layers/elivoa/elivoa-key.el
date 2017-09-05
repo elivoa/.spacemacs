@@ -3,7 +3,7 @@
 ;;;   Including basic key mapping
 ;;;
 ;; -*- coding: utf-8 -*-
-;; Time-stamp: <[elivoa-key.el] Elivoa @ Sunday, 2017-08-27 12:33:19>
+;; Time-stamp: <[elivoa-key.el] Elivoa @ Friday, 2017-09-01 21:20:43>
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;; basic settings of Emacs.
 ;;
@@ -64,6 +64,10 @@
 (global-set-key (kbd "M-n") 'cua-scroll-up)
 (global-set-key (kbd "M-p") 'cua-scroll-down)
 
+;; edit commands
+(global-set-key (kbd "M-;") 'comment-line)
+(global-set-key (kbd "s-/") 'comment-line)
+
 ;; window / frames
 (global-set-key (kbd "C-s-1")  'delete-other-windows)
 (global-set-key (kbd "C-s-2")  'split-window-below)
@@ -117,8 +121,6 @@
 ;; (global-set-key (kbd "C-s-268632076")  'llll)
 (global-set-key (kbd "s-L")  'kill-current-buffer)
 ;; (global-set-key (kbd [C-s-268632076])  'kill-current-buffer) ;; C-s-L; not work.
-;; (global-set-key (kbd "s-/")  'evilnc-comment-operator)
-(global-set-key (kbd "s-/")  'comment-line)
 
 
 
